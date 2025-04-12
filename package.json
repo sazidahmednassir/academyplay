@@ -1,0 +1,24 @@
+{
+  "name": "playwrg",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "fulltest": "npx playwright test",
+    "smoke": "npx playwright test --grep @smoke",
+    "regression": "npx playwright test --grep @regression"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.1.1",
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^22.9.3",
+    "allure-playwright": "^3.0.7"
+  },
+  "dependencies": {
+    "playwright": "^1.49.1",
+    "xlsx": "^0.18.5"
+  }
+}
