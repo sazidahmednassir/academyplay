@@ -31,6 +31,11 @@ class EcommerceApi {
         });
         return await response.json();
     }
+
+    async getUserDetails(request, userId) {
+        const response = await request.get(`https://gorest.co.in/public/v2/users/${userId}`);
+        return response;
+    }
 }
 
 module.exports = { EcommerceApi };

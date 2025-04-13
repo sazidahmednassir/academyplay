@@ -672,28 +672,44 @@ jobs:
           const inlineAssets = require('inline-assets');
 
           (async () => {
-              const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
-              const page = await browser.newPage();
-              await page.goto('file://$PWD/allure-report/index.html', { waitUntil: 'networkidle0' });
+              try {
+                  const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+                  const page = await browser.newPage();
+                  await page.goto('file://$PWD/allure-report/index.html', { waitUntil: 'networkidle0' });
 
-              // Save the initial HTML content
-              const htmlContent = await page.content();
-              fs.writeFileSync('allure-report-temp.html', htmlContent);
+                  // Save the initial HTML content
+                  const htmlContent = await page.content();
+                  fs.writeFileSync('allure-report-temp.html', htmlContent);
 
-              // Inline all assets into the HTML file
-              await inlineAssets('allure-report-temp.html', {
-                  inline: true,
-                  compress: false,
-                  rootpath: './allure-report',
-              });
+                  // Inline all assets into the HTML file
+                  await inlineAssets('allure-report-temp.html', {
+                      inline: true,
+                      compress: false,
+                      rootpath: './allure-report',
+                  });
 
-              // Save the final single HTML file
-              fs.renameSync('allure-report-temp.html', 'allure-report.html');
+                  // Save the final single HTML file
+                  fs.renameSync('allure-report-temp.html', 'allure-report.html');
 
-              await browser.close();
+                  console.log("Allure report successfully converted to a single HTML file.");
+                  await browser.close();
+              } catch (error) {
+                  console.error("Error during Allure report conversion:", error);
+                  process.exit(1);
+              }
           })();
           EOF
         continue-on-error: true
+
+      - name: Verify Allure HTML File
+        run: |
+          echo "Verifying allure-report.html file..."
+          if [ -f "allure-report.html" ]; then
+            echo "allure-report.html exists and is ready to be sent."
+          else
+            echo "allure-report.html not found. Exiting."
+            exit 1
+          fi
 
       - name: Send Email with Allure HTML Report
         uses: dawidd6/action-send-mail@v3
