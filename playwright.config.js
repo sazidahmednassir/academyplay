@@ -36,7 +36,7 @@ module.exports = defineConfig({
     baseURL: "https://rahulshettyacademy.com/client", // Base URL for the application under test
     timeout: 60000, // Set test timeout to 60 seconds
     trace: "on", // Enable tracing for debugging
-    headless: false, // Run tests in non-headless mode
+    headless: true, // Run tests in non-headless mode
     screenshot: "only-on-failure", // Capture screenshots only on test failures
     video: "retain-on-failure", // Retain video recordings only on test failures
     launchOptions: {
