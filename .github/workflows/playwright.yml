@@ -645,10 +645,8 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Install Required Tools
-        run: |
-          npm install puppeteer
-          npm install inline-assets
+      - name: Install Puppeteer
+        run: npm install puppeteer
 
       - name: Run Playwright Tests
         run: npx playwright test
@@ -669,7 +667,6 @@ jobs:
           node <<EOF
           const puppeteer = require('puppeteer');
           const fs = require('fs');
-          const inlineAssets = require('inline-assets');
 
           (async () => {
               try {
@@ -677,20 +674,16 @@ jobs:
                   const page = await browser.newPage();
                   await page.goto('file://$PWD/allure-report/index.html', { waitUntil: 'networkidle0' });
 
-                  // Save the initial HTML content
-                  const htmlContent = await page.content();
-                  fs.writeFileSync('allure-report-temp.html', htmlContent);
-
-                  // Inline all assets into the HTML file
-                  await inlineAssets('allure-report-temp.html', {
-                      inline: true,
-                      compress: false,
-                      rootpath: './allure-report',
+                  // Capture the fully rendered page as a single HTML file
+                  const htmlContent = await page.evaluate(() => {
+                      const doc = document.documentElement.cloneNode(true);
+                      const base = document.createElement('base');
+                      base.href = document.location.href;
+                      doc.querySelector('head').appendChild(base);
+                      return doc.outerHTML;
                   });
 
-                  // Save the final single HTML file
-                  fs.renameSync('allure-report-temp.html', 'allure-report.html');
-
+                  fs.writeFileSync('allure-report.html', htmlContent);
                   console.log("Allure report successfully converted to a single HTML file.");
                   await browser.close();
               } catch (error) {
