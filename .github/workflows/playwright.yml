@@ -57,7 +57,7 @@ jobs:
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "Allure Test Report"
-          body: "The Allure report is attached as a single HTML file. Open it in your browser to view the test results."
+          body: "Here are the Current test results."
           to: "sazidahmednassir@gmail.com"
           from: ${{ secrets.EMAIL_USERNAME }}
           attachments: allure-report/index.html
