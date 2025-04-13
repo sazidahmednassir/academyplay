@@ -629,39 +629,48 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Step 2: Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
+      # Step 3: Install dependencies
       - name: Install Dependencies
         run: npm ci
 
+      # Step 4: Install Playwright browsers
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
+      # Step 5: Run Playwright tests
       - name: Run Playwright Tests
         run: npx playwright test
         continue-on-error: true
 
+      # Step 6: Install Allure Command Line Tool
       - name: Install Allure Command Line Tool
         run: npm install -g allure-commandline
 
+      # Step 7: Generate Allure Report
       - name: Generate Allure Report
         run: |
           rm -rf allure-report
           allure generate allure-results --clean -o allure-report || echo "Report generation failed"
         continue-on-error: true
 
+      # Step 8: Deploy Allure Report to GitHub Pages
       - name: Deploy Allure Report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.TOKEN }}
           publish_dir: ./allure-report
 
+      # Step 9: Send Email with Allure Report Link
       - name: Send Email with Allure Report Link
         uses: dawidd6/action-send-mail@v3
         with:
@@ -684,6 +693,7 @@ jobs:
           to: "sazidahmednassir@gmail.com" # Replace with the recipient's email
           from: ${{ secrets.EMAIL_USERNAME }}
 
+      # Step 10: Fail Workflow if Tests Failed
       - name: Fail Workflow if Tests Failed
         if: failure()
         run: exit 1
