@@ -1,10 +1,11 @@
 const { test, expect } = require('@playwright/test');
-const { getUserDetails } = require('../../api/ecommerceApi');
+const { EcommerceApi } = require('../../api/ecommerceApi');
 
 test.describe('User API Tests', () => {
     test('should return user details', async ({ request }) => {
         // Call the function from ecommerceApi.js
-        const response = await getUserDetails(request, 7380156);
+        const ecommerceApi= new EcommerceApi ();
+        const response = await ecommerceApi.getUserDetails(request, 7380156);
 
         // Validate the response status
         expect(response.status()).toBe(200);
