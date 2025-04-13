@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const { getUserDetails } = require('../../api/ecommerceApi');
 
 test.describe('User API Tests', () => {
-    test.only('should return user details', async ({ request }) => {
+    test('should return user details', async ({ request }) => {
         // Call the function from ecommerceApi.js
         const response = await getUserDetails(request, 7380156);
 
