@@ -645,13 +645,15 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
+      - name: Install Puppeteer Locally
+        run: npm install puppeteer
+
       - name: Run Playwright Tests
         run: npx playwright test
         continue-on-error: true
 
-      - name: Install Allure Command Line Tool and Puppeteer
-        run: |
-          npm install -g allure-commandline puppeteer
+      - name: Install Allure Command Line Tool
+        run: npm install -g allure-commandline
 
       - name: Generate Allure Report
         run: |
