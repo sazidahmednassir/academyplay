@@ -1,5 +1,4 @@
 # name: Playwright Tests with Allure Report
-# name: Playwright Tests with Allure Report
 name: Playwright Tests with Allure Report as Single HTML
 
 on:
@@ -10,7 +9,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: "30 19 * * *" # Runs every day at 01:30 a.m. Bangladesh Time (UTC+6)
+    - cron: "45 19 * * *" # Runs every day at 01:30 a.m. Bangladesh Time (UTC+6)
 
 jobs:
   test:
