@@ -1,8 +1,8 @@
 # name: Playwright Tests with Allure Report
+# name: Playwright Tests with Allure Report
 name: Playwright Tests with Allure Report as Single HTML
 
 on:
-  workflow_dispatch: # Allow manual trigger from GitHub UI
   push:
     branches:
       - main
@@ -10,14 +10,11 @@ on:
     branches:
       - main
   schedule:
-    - cron: "18 19 * * *" # Runs every day at 1:10 AM Bangladesh Time (UTC+6)
+    - cron: "30 19 * * *" # Runs every day at 01:30 a.m. Bangladesh Time (UTC+6)
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write # Needed for using GITHUB_TOKEN and uploading files
 
     steps:
       # Step 1: Checkout the repository
