@@ -19,7 +19,7 @@ academyplay/
 ├── tests/
 │   ├── fixture/            # Custom Playwright fixtures
 │   │   └── customfixture.js
-│   ├── regression/                 # UI test specs
+│   ├── regression/                 # test specs
 │   │   ├── dashboardTests.spec.js
 │   │   └── loginTests.spec.js
 ├── playwright.config.js    # Playwright configuration
