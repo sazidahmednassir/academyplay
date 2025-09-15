@@ -78,6 +78,4 @@ academyplay/
 - If you see browser errors, run `npx playwright install`.
 - If you see module errors, check that all files exist and are named correctly.
 
-## License
 
-MIT
