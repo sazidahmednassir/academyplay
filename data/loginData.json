@@ -2,6 +2,7 @@
     "url": "https://rahulshettyacademy.com/client",
     "userEmail": "sazidahmednx23@yopmail.com",
     "password": "One@500#$",
+    "invalidEmail": "invalid@example.com",
     "invalidPassword": "Invalid@123",
     "productName": "ZARA COAT 3"
-  }
+}
