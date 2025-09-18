@@ -14,8 +14,6 @@ academyplay/
 │   ├── DashboardPage.js   # Dashboard page locators and actions
 │   └── LoginPage.js       # Login page locators and actions
 ├── tests/
-│   ├── api/               # API tests
-│   │   └── orderApi.spec.js
 │   ├── ui/                # UI tests
 │   │   ├── dashboardTests.spec.js
 │   │   └── loginTests.spec.js
@@ -115,7 +113,6 @@ Key Points:
    - Use descriptive test names
    - Initialize page objects in `beforeEach`
    - Use test data from JSON files
-   - Follow AAA pattern (Arrange, Act, Assert)
 
 3. **General:**
    - Keep test data separate in JSON files
